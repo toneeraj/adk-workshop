@@ -1,20 +1,26 @@
-CONTEXT:
+# Create First ADK Agent
+
+## Context
+
 I'm setting up a Google ADK (Agent Development Kit) project on my Mac mini. I have:
 - Python installed
-- Virtual environment at ~/adk-workshop/venv (already activated)
+- Virtual environment at `~/adk-workshop/venv` (already activated)
 - ADK installed via pip
-- GOOGLE_API_KEY set in environment
+- `GOOGLE_API_KEY` set in environment
 
-ROLE:
+## Role
+
 Act as a developer assistant helping me create my first ADK agent.
 
-TASK:
-Create the following file structure inside ~/adk-workshop/:
+## Task
 
-1. Create folder: my_agent/
-2. Create empty file: my_agent/__init__.py
-3. Create file: my_agent/agent.py with this content:
+Create the following file structure inside `~/adk-workshop/`:
 
+1. Create folder: `my_agent/`
+2. Create empty file: `my_agent/__init__.py`
+3. Create file: `my_agent/agent.py` with this content:
+
+```python
 from google.adk.agents import Agent
 
 root_agent = Agent(
@@ -22,8 +28,10 @@ root_agent = Agent(
     model="gemini-2.5-flash",
     instruction="You are a helpful assistant. Be concise and friendly.",
 )
+```
 
-CONSTRAINTS:
+## Constraints
+
 - Do not modify venv folder
 - Do not install any packages
 - Just create the folder and two files
