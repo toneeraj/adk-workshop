@@ -1,3 +1,20 @@
+# Add Structured Outputs with Pydantic
+
+## Context
+
+I'm at ~/adk-workshop with an ADK agent that has tools returning strings.
+I want to upgrade to structured outputs using Pydantic models.
+Using Gemini model.
+
+## Role
+
+Act as a developer assistant helping me add structured outputs.
+
+## Task
+
+Replace ~/adk-workshop/my_agent/agent.py with:
+
+```python
 from google.adk.agents import Agent
 from pydantic import BaseModel, Field
 from typing import Optional
@@ -93,3 +110,31 @@ Use get_stock_price for stock price questions.
 Present the structured data clearly to users.""",
     tools=[get_weather, calculate, get_stock_price],
 )
+```
+
+Then restart the server:
+```bash
+lsof -ti :8000 | xargs kill -9 2>/dev/null || true
+adk web
+```
+
+## Key Concepts
+
+1. **Pydantic BaseModel** — Define data structure with types
+2. **Field(description=...)** — Help LLM understand each field
+3. **Return type hint** — `-> WeatherResponse` tells ADK the output schema
+4. **ADK auto-converts** — Pydantic models become JSON for the LLM
+
+## Constraints
+
+- Use Pydantic BaseModel for all tool outputs
+- Include Field descriptions for each attribute
+- Return type must match the Pydantic model
+- Restart server after changes
+
+## Test Queries
+
+After restarting, try:
+- "What's the weather in Delhi?" → Returns structured WeatherResponse
+- "Calculate 100 * 0.15" → Returns structured CalculationResponse
+- "MSFT stock price?" → Returns structured StockResponse
