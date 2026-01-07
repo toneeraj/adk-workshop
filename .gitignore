@@ -6,3 +6,5 @@ __pycache__/
 node_modules/
 .adk/
 .pytest_cache/
+.claude/
+.vscode/
